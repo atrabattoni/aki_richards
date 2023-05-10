@@ -1,5 +1,5 @@
 import numpy as np
-from aki_richard import zoeppritz
+from aki_richards import zoeppritz
 import matplotlib.pyplot as plt
 
 # Aki & Richard page 147

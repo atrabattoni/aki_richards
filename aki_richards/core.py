@@ -96,3 +96,20 @@ def scattering_matrix(r1, a1, b1, r2, a2, b2, p, energy_normalization=False):
         )[..., np.newaxis]
         D = np.sqrt(L / L.T)
         return I, S * D
+
+
+def interface_motion(I, S, axis="x", mode="direct"):
+    if mode == "direct":
+        return [
+            np.sin(I[0]) * (1 + S[0, 0]) + np.cos(I[1]) * S[1, 0],
+            np.cos(I[1]) * (1 + S[1, 1]) + np.sin(I[1]) * S[0, 1],
+            np.sin(I[2]) * (1 + S[2, 2]) + np.cos(I[3]) * S[3, 2],
+            np.cos(I[3]) * (1 + S[3, 3]) + np.sin(I[2]) * S[2, 3],
+        ]
+    if mode == "indirect":
+        return [
+            np.sin(I[2]) * S[2, 0] + np.cos(I[3]) * S[3, 0],
+            np.sin(I[2]) * S[2, 1] + np.cos(I[3]) * S[3, 1],
+            np.sin(I[0]) * S[0, 2] + np.cos(I[1]) * S[1, 2],
+            np.sin(I[0]) * S[0, 3] + np.cos(I[1]) * S[1, 3],
+        ]

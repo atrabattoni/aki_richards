@@ -1,5 +1,5 @@
 import numpy as np
-from aki_richards import scattering_matrix
+from aki_richards import scattering_matrix, interface_motion
 import matplotlib.pyplot as plt
 
 # Aki & Richard page 147
@@ -62,3 +62,5 @@ for ax in axes.flat:
     ax.legend()
 
 fig.show()
+
+assert np.allclose(interface_motion(I, S, "direct"), interface_motion(I, S, "indirect"))

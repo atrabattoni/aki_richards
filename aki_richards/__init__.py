@@ -1,1 +1,1 @@
-from .core import scattering_matrix
+from .core import scattering_matrix, interface_motion

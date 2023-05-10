@@ -1,1 +1,1 @@
-from .core import zoeppritz
+from .core import scattering_matrix

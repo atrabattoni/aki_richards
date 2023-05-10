@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import streamlit as st
 
-from aki_richards import zoeppritz
+from aki_richards import scattering_matrix
 
 # %%
 t0 = st.write(
@@ -31,7 +31,7 @@ theta = np.linspace(-np.pi / 2, np.pi / 2, 202)[1:-1]
 p = np.sin(theta) / a2
 out = np.zeros(p.shape, dtype="complex")
 for idx, value in enumerate(p):
-    I, S = zoeppritz(r1, a1, b1, r2, a2, b2, value)
+    I, S = scattering_matrix(r1, a1, b1, r2, a2, b2, value)
     gain_P = np.sin(I[2]) * (1 + S[2, 2]) + np.cos(I[3]) * S[3, 2]
     _gain_P = np.sin(I[0]) * S[0, 2] + np.cos(I[1]) * S[1, 2]
     assert np.isclose(gain_P, _gain_P)
@@ -42,7 +42,7 @@ theta = np.linspace(-np.pi / 2, np.pi / 2, 202)
 p = np.sin(theta) / b2
 out = np.zeros(p.shape, dtype="complex")
 for idx, value in enumerate(p):
-    I, S = zoeppritz(r1, a1, b1, r2, a2, b2, value)
+    I, S = scattering_matrix(r1, a1, b1, r2, a2, b2, value)
     gain_S = np.cos(I[3]) * (1 + S[3, 3]) + np.sin(I[2]) * S[2, 3]
     _gain_S = np.sin(I[0]) * S[0, 3] + np.cos(I[1]) * S[1, 3]
     assert np.isclose(gain_S, _gain_S)

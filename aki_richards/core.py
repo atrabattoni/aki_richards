@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def zoeppritz(r1, a1, b1, r2, a2, b2, p, energy_normalization=False):
+def scattering_matrix(r1, a1, b1, r2, a2, b2, p, energy_normalization=False):
     # Angles computation
     i1 = np.arcsin(complex(p * a1))
     j1 = np.arcsin(complex(p * b1))

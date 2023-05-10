@@ -14,7 +14,6 @@ r2 = right_column.slider(label=r"$\rho_2$", min_value=0.0, max_value=10.0, step=
 a2 = right_column.slider(label=r"$\alpha_2$", min_value=0.0, max_value=10.0, step=0.1, value=2.0)
 b2 = right_column.slider(label=r"$\beta_2$", min_value=0.0, max_value=10.0, step=0.1, value=0.3)
 
-plt.style.use("dark_background")
 fig = plt.figure()
 ax = fig.add_subplot(projection="polar")
 

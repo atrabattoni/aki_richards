@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aki_richards"
+version = "0.1"
+authors = [
+    {name = "Alister Trabattoni", email = "alister.trabattoni@gmail.com"},
+]
+dependencies = [
+    "matplotlib",
+    "numpy",
+]

@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import streamlit as st
 
-from aki_richard import zoeppritz
+from aki_richards import zoeppritz
 
 # %%
 left_column, right_column = st.columns(2)

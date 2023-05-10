@@ -6,15 +6,24 @@ import streamlit as st
 from aki_richards import zoeppritz
 
 # %%
-left_column, right_column = st.columns(2)
-r1 = left_column.slider(label=r"$\rho_1$", min_value=0.0, max_value=10.0, step=0.1, value=1.0)
-a1 = left_column.slider(label=r"$\alpha_1$", min_value=0.0, max_value=10.0, step=0.1, value=1.5)
-b1 = left_column.slider(label=r"$\beta_1$", min_value=0.0, max_value=10.0, step=0.1, value=0.0)
-r2 = right_column.slider(label=r"$\rho_2$", min_value=0.0, max_value=10.0, step=0.1, value=2.0)
-a2 = right_column.slider(label=r"$\alpha_2$", min_value=0.0, max_value=10.0, step=0.1, value=2.0)
-b2 = right_column.slider(label=r"$\beta_2$", min_value=0.0, max_value=10.0, step=0.1, value=0.3)
+t0 = st.write(
+    """
+    # DAS response
 
-fig = plt.figure()
+    Sensitivity to incoming P- and S-waves coming from below.
+    """
+)
+left_column, right_column = st.columns(2)
+t1 = left_column.write("## Top layer")
+r1 = left_column.slider(label=r"Density $\rho_1$", min_value=0.0, max_value=10.0, step=0.1, value=1.0)
+a1 = left_column.slider(label=r"P-wave speed $\alpha_1$ [km/s]", min_value=0.0, max_value=10.0, step=0.1, value=1.5)
+b1 = left_column.slider(label=r"S-wave speed $\beta_1$ [km/s]", min_value=0.0, max_value=10.0, step=0.1, value=0.0)
+t1 = right_column.write("## Bottom layer")
+r2 = right_column.slider(label=r"Density $\rho_2$", min_value=0.0, max_value=10.0, step=0.1, value=2.0)
+a2 = right_column.slider(label=r"P-wave speed $\alpha_2$ [km/s]", min_value=0.0, max_value=10.0, step=0.1, value=2.0)
+b2 = right_column.slider(label=r"S-wave speed $\beta_2$ [km/s]", min_value=0.0, max_value=10.0, step=0.1, value=0.3)
+
+fig = plt.figure(dpi=300)
 ax = fig.add_subplot(projection="polar")
 
 theta = np.linspace(-np.pi / 2, np.pi / 2, 202)[1:-1]

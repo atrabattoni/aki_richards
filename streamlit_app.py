@@ -1,11 +1,9 @@
-# %%
 import numpy as np
 import matplotlib.pyplot as plt
 import streamlit as st
 
 from aki_richards import scattering_matrix, interface_motion
 
-# %%
 t0 = st.write(
     """
     # DAS response
@@ -90,6 +88,3 @@ ax.set_theta_zero_location("S")
 ax.set_rticks([0, 0.5, 1, 1.5, 2])
 
 st.write(fig)
-
-
-# %%

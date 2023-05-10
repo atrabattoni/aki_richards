@@ -1,14 +1,15 @@
 [build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
 
-[project]
-name = "aki_richards"
-version = "0.1"
-authors = [
-    {name = "Alister Trabattoni", email = "alister.trabattoni@gmail.com"},
-]
-dependencies = [
-    "matplotlib",
-    "numpy",
-]
+[tool.poetry]
+name = "aki-richards"
+version = "0.1.0"
+description = ""
+authors = ["Alister Trabattoni <alister.trabattoni@gmail.com>"]
+readme = "README.md"
+packages = [{include = "aki_richards"}]
+
+[tool.poetry.dependencies]
+matplotlib
+numpy

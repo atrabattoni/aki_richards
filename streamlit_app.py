@@ -27,32 +27,32 @@ a1 = left_column.slider(
     label=r"P-wave speed $\alpha_1$ [km/s]",
     min_value=0.0,
     max_value=10.0,
-    step=0.1,
+    step=0.05,
     value=1.5,
 )
 b1 = left_column.slider(
     label=r"S-wave speed $\beta_1$ [km/s]",
     min_value=0.0,
     max_value=10.0,
-    step=0.1,
+    step=0.05,
     value=0.0,
 )
 t1 = right_column.write("## Bottom layer")
 r2 = right_column.slider(
-    label=r"Density $\rho_2$", min_value=0.0, max_value=10.0, step=0.1, value=2.0
+    label=r"Density $\rho_2$", min_value=0.0, max_value=10.0, step=0.05, value=2.0
 )
 a2 = right_column.slider(
     label=r"P-wave speed $\alpha_2$ [km/s]",
     min_value=0.0,
     max_value=10.0,
-    step=0.1,
+    step=0.05,
     value=2.0,
 )
 b2 = right_column.slider(
     label=r"S-wave speed $\beta_2$ [km/s]",
     min_value=0.0,
     max_value=10.0,
-    step=0.1,
+    step=0.05,
     value=0.3,
 )
 

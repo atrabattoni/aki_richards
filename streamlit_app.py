@@ -59,7 +59,7 @@ b2 = right_column.slider(
 fig = plt.figure(dpi=300)
 ax = fig.add_subplot(projection="polar")
 
-n = 100
+n = 1000
 
 if critical_angles:
     for phase, ls, pair in zip(["P", "S"], ["--", ":"], [(a1, a2), (b1, b2)]):

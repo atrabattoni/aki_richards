@@ -11,6 +11,9 @@ t0 = st.write(
     Sensitivity to incoming P- and S-waves coming from below and above the cable.
     """
 )
+
+quantity = st.radio("Which horizontal quantity", [r"displacement", r"strain"])
+
 left_column, right_column = st.columns(2)
 t1 = left_column.write("## Top layer")
 r1 = left_column.slider(
@@ -59,28 +62,36 @@ out = np.zeros(p.shape, dtype="complex")
 for idx, value in enumerate(p):
     I, S = scattering_matrix(r1, a1, b1, r2, a2, b2, value)
     out[idx] = interface_motion(I, S)[0]
-ax.plot(theta + np.pi, np.abs(p * out) * a2, label="P")
+if quantity == "strain":
+    out *= p * a1
+ax.plot(theta + np.pi, np.abs(out), label="P")
 
 p = np.sin(theta) / b1
 out = np.zeros(p.shape, dtype="complex")
 for idx, value in enumerate(p):
     I, S = scattering_matrix(r1, a1, b1, r2, a2, b2, value)
     out[idx] = interface_motion(I, S)[1]
-ax.plot(theta + np.pi, np.abs(p * out) * b2, label="S")
+if quantity == "strain":
+    out *= p * b1
+ax.plot(theta + np.pi, np.abs(out), label="S")
 
 p = np.sin(theta) / a2
 out = np.zeros(p.shape, dtype="complex")
 for idx, value in enumerate(p):
     I, S = scattering_matrix(r1, a1, b1, r2, a2, b2, value)
     out[idx] = interface_motion(I, S)[2]
-ax.plot(theta, np.abs(p * out) * a2, label="P")
+if quantity == "strain":
+    out *= p * a2
+ax.plot(theta, np.abs(out), label="P")
 
 p = np.sin(theta) / b2
 out = np.zeros(p.shape, dtype="complex")
 for idx, value in enumerate(p):
     I, S = scattering_matrix(r1, a1, b1, r2, a2, b2, value)
     out[idx] = interface_motion(I, S)[3]
-ax.plot(theta, np.abs(p * out) * b2, label="S")
+if quantity == "strain":
+    out *= p * b2
+ax.plot(theta, np.abs(out), label="S")
 
 ax.legend()
 ax.set_rlim(0, 2)

@@ -21,7 +21,7 @@ critical_angles = st.checkbox("Plot critical angles")
 left_column, right_column = st.columns(2)
 t1 = left_column.write("## Top layer")
 r1 = left_column.slider(
-    label=r"Density $\rho_1$", min_value=0.0, max_value=10.0, step=0.1, value=1.0
+    label=r"Density $\rho_1$", min_value=0.0, max_value=10.0, step=0.05, value=1.0
 )
 a1 = left_column.slider(
     label=r"P-wave speed $\alpha_1$ [km/s]",

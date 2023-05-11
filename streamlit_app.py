@@ -12,7 +12,11 @@ t0 = st.write(
     """
 )
 
-quantity = st.radio("Which horizontal quantity", [r"displacement", r"strain"])
+quantity = st.radio("Which horizontal quantity", [r"strain", r"displacement"])
+
+homogeneous = st.checkbox("Plot homogeneous solution")
+
+critical_angles = st.checkbox("Plot critical angles")
 
 left_column, right_column = st.columns(2)
 t1 = left_column.write("## Top layer")
@@ -55,7 +59,33 @@ b2 = right_column.slider(
 fig = plt.figure(dpi=300)
 ax = fig.add_subplot(projection="polar")
 
-theta = np.linspace(-np.pi / 2, np.pi / 2, 202)[1:-1]
+n = 100
+
+if critical_angles:
+    for phase, ls, pair in zip(["P", "S"], ["--", ":"], [(a1, a2), (b1, b2)]):
+        c1, c2 = pair
+        if c1 < c2:
+            theta_c = np.arcsin(c1 / c2)
+            ax.axvline(
+                np.pi + theta_c, color="grey", ls=ls, label=f"$\\theta_c^{phase}$"
+            )
+            ax.axvline(np.pi - theta_c, color="grey", ls=ls)
+        if c2 < c1:
+            theta_c = np.arcsin(c2 / c1)
+            ax.axvline(theta_c, color="grey", ls=ls, label=f"$\\theta_c^{phase}$")
+            ax.axvline(-theta_c, color="grey", ls=ls)
+
+if homogeneous:
+    theta = np.linspace(-np.pi, np.pi, 2 * n + 1)[1:-1]
+    out_P = np.sin(theta)
+    out_S = np.cos(theta)
+    if quantity == "strain":
+        out_P *= np.sin(theta)
+        out_S *= np.sin(theta)
+    ax.plot(theta, np.abs(out_P), "k--", label="P")
+    ax.plot(theta, np.abs(out_S), "k:", label="S")
+
+theta = np.linspace(-np.pi / 2, np.pi / 2, n + 1)[1:-1]
 
 p = np.sin(theta) / a1
 out = np.zeros(p.shape, dtype="complex")
@@ -93,7 +123,7 @@ if quantity == "strain":
     out *= p * b2
 ax.plot(theta, np.abs(out), label="S")
 
-ax.legend()
+ax.legend(ncols=2 + critical_angles + homogeneous)
 ax.set_rlim(0, 2)
 ax.set_theta_zero_location("S")
 ax.set_rticks([0, 0.5, 1, 1.5, 2])
